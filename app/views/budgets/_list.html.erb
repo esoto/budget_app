@@ -1,0 +1,48 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% budgets.each do |budget| %>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 flex flex-col justify-between <%= 'ring-2 ring-blue-500' if budget == current_budget %>">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-lg font-semibold text-gray-900 truncate"><%= budget.name %></h2>
+          <% if budget == current_budget %>
+            <span class="ml-2 px-2 py-1 text-xs font-semibold rounded bg-blue-100 text-blue-700">Current</span>
+          <% end %>
+        </div>
+        <p class="text-xs text-gray-500 mb-2">
+          <%= budget.start_date.strftime('%b %d, %Y') %> - <%= budget.end_date.strftime('%b %d, %Y') %>
+        </p>
+        <div class="mb-4">
+          <div class="flex justify-between text-xs text-gray-600 mb-1">
+            <span>Total</span>
+            <span><%= number_to_currency(budget.total_amount) %></span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-600 mb-1">
+            <span>Spent</span>
+            <span><%= number_to_currency(budget.total_spent) %></span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-600 mb-1">
+            <span>Remaining</span>
+            <span class="<%= budget.remaining_amount >= 0 ? 'text-green-600' : 'text-red-600' %>"><%= number_to_currency(budget.remaining_amount) %></span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+            <div class="h-2 rounded-full transition-all duration-300 <%= budget.percentage_used > 90 ? 'bg-red-500' : budget.percentage_used > 70 ? 'bg-yellow-500' : 'bg-green-500' %>" 
+                 style="width: <%= [budget.percentage_used, 100].min %>%"></div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500 mt-1">
+            <span>0%</span>
+            <span><%= budget.percentage_used %>% used</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 mt-4">
+        <%= link_to "Edit", edit_budget_path(budget), 
+          class: "px-3 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded hover:bg-blue-200 transition-colors",
+          data: { turbo_stream: true } %>
+        <%= link_to "Delete", budget_path(budget), 
+          method: :delete, 
+          data: { confirm: 'Are you sure you want to delete this budget?' },
+          class: "px-3 py-1 text-xs font-medium text-red-700 bg-red-100 rounded hover:bg-red-200 transition-colors" %>
+      </div>
+    </div>
+  <% end %>
+</div> 

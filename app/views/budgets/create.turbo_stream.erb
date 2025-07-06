@@ -1,0 +1,15 @@
+<%= turbo_stream.replace "budget-modal" do %>
+  <div id="budget-modal" class="hidden"></div>
+<% end %>
+
+<%= turbo_stream.replace "budgets-list" do %>
+  <%= render partial: 'budgets/list', locals: { budgets: @budgets, current_budget: @current_budget } %>
+<% end %>
+
+<%= turbo_stream.replace "flash-messages" do %>
+  <div id="flash-messages" class="fixed top-4 right-4 z-50">
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+<% end %> 

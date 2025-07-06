@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "budget-modal" do %>
+  <%= render 'shared/modal', 
+      modal_id: 'budget-modal',
+      title: 'Create Budget',
+      content: render('form') %>
+<% end %> 

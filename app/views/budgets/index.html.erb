@@ -1,0 +1,17 @@
+<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">Budgets</h1>
+    <%= link_to "New Budget", new_budget_path, 
+      class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium",
+      data: { turbo_stream: true } %>
+  </div>
+
+  <div id="budgets-list">
+    <%= render partial: 'budgets/list', locals: { budgets: @budgets, current_budget: @current_budget } %>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="budget-modal" class="hidden"></div>
+  <!-- Flash Messages -->
+  <div id="flash-messages" class="fixed top-4 right-4 z-50"></div>
+</div>
