@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "transactions/index"
+  get "transactions/show"
+  get "transactions/new"
+  get "transactions/create"
+  get "transactions/edit"
+  get "transactions/update"
+  get "transactions/destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
