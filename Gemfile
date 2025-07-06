@@ -61,7 +61,7 @@ gem "rspec-rails", "~> 8.0"
 gem "hotwire-rails", "~> 0.1.3"
 
 # Tailwind CSS
-gem "tailwindcss-rails", "~> 2.4"
+gem "tailwindcss-rails", "~> 4.2"
 
 # For better form handling
 gem "simple_form", "~> 5.2"
