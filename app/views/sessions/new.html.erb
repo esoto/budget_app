@@ -1,0 +1,17 @@
+<h1 class="text-2xl font-bold mb-6">Sign in</h1>
+
+<%= form_with url: session_path, method: :post, class: "space-y-4" do |f| %>
+  <div>
+    <%= f.label :email, class: "block font-medium text-gray-700" %>
+    <%= f.email_field :email, class: "mt-1 w-full rounded border-gray-300" %>
+  </div>
+
+  <div>
+    <%= f.label :password, class: "block font-medium text-gray-700" %>
+    <%= f.password_field :password, class: "mt-1 w-full rounded border-gray-300" %>
+  </div>
+
+  <div>
+    <%= f.submit "Login", class: "px-4 py-2 bg-blue-600 text-white rounded" %>
+  </div>
+<% end %>
