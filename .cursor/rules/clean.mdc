@@ -1,0 +1,175 @@
+---
+title: Clean Command for Multi-Language Projects
+description: Guidelines for the /clean command that fixes code formatting and quality issues across Ruby/Rails and JavaScript/TypeScript projects
+glob: "**/*"
+alwaysApply: true
+---
+
+# Clean Command for Multi-Language Projects
+
+## Introduction
+
+Fix all code formatting and quality issues in the entire codebase. The `/clean` command automatically detects project type and runs appropriate formatters, linters, and type checkers to ensure consistent code quality.
+
+## Command Usage
+
+- `/clean` - Run all cleanup tasks
+- `/clean --safe` - Run only safe cleanup tasks (formatting only, no fixes)
+- `/clean --deep` - Run deep cleanup including type checking and aggressive fixes
+
+## Supported Project Types
+
+### Ruby/Rails Projects
+Fix all RuboCop, Brakeman, and Rails best practice issues
+
+#### Steps:
+1. **Format with RuboCop**: `rubocop -A` (auto-correct all safe violations)
+2. **Security check with Brakeman**: `brakeman -q`  
+3. **Rails environment validation**: Ensure Rails can load properly
+4. **Clear temporary files**: `rails tmp:clear`
+
+#### Tools Required:
+- `rubocop` (with rubocop-rails-omakase)
+- `brakeman` (security scanner)
+
+### JavaScript/TypeScript Projects
+Fix all ESLint, Prettier, and TypeScript issues
+
+#### Steps:
+1. **Format with Prettier**: `npx prettier --write .`
+2. **Fix ESLint issues**: `npx eslint . --fix`
+3. **Check TypeScript**: `npx tsc --noEmit`
+4. **Clear node_modules/.cache**: Clean build artifacts
+
+#### Tools Required:
+- `prettier` (code formatter)
+- `eslint` (linter with auto-fix)
+- `typescript` (type checker)
+
+### Mixed Projects (Rails + JavaScript)
+Run both Ruby and JavaScript cleanup processes in sequence
+
+## General Process
+
+1. **Detect Project Type**: Check for `Gemfile`, `package.json`, config files
+2. **Run Automated Formatters**: Apply consistent formatting first
+3. **Fix Linting Issues**: Auto-correct style and quality violations  
+4. **Type Checking**: Resolve type annotation errors
+5. **Clean Temporary Files**: Remove cache, logs, build artifacts
+6. **Verification**: Ensure all tools pass with no errors
+7. **Summary Report**: Show what was cleaned and any remaining issues
+
+## Mode-Specific Behavior
+
+### Standard Mode (`/clean`)
+- Run all formatters and auto-fixes
+- Apply safe corrections only
+- Clean temporary files with confirmation
+- Show summary of changes
+
+### Safe Mode (`/clean --safe`)
+- Format code only (no fixes)
+- No destructive operations
+- Skip dependency and cache cleanup
+- Truncate logs instead of deleting
+
+### Deep Mode (`/clean --deep`)
+- Apply aggressive fixes and corrections
+- Include unsafe auto-corrections
+- Complete cleanup of all temporary files
+- Force dependency cleanup
+- Run comprehensive type checking
+
+## Project Detection Logic
+
+### Ruby/Rails Detection
+```bash
+# Detected if any exist:
+- Gemfile
+- config/application.rb
+- .rubocop.yml
+- Rakefile with Rails
+```
+
+### JavaScript/TypeScript Detection  
+```bash
+# Detected if any exist:
+- package.json
+- tsconfig.json
+- .eslintrc.* files
+- prettier.config.*
+```
+
+### Mixed Project Handling
+If both Ruby and JavaScript files detected, run both cleanup processes sequentially.
+
+## Common Issues & Solutions
+
+### Ruby/Rails Issues
+- **Style violations**: Fixed by `rubocop -A`
+- **Security warnings**: Reported by `brakeman`
+- **Rails environment errors**: Check config and dependencies
+- **Gem conflicts**: Run `bundle install`
+
+### JavaScript/TypeScript Issues
+- **Import order conflicts**: Resolved by Prettier + ESLint coordination
+- **Line length violations**: Auto-fixed by Prettier
+- **Unused imports/variables**: Removed by ESLint `--fix`
+- **Type annotation requirements**: Flagged by TypeScript compiler
+- **Missing return types**: Must be fixed manually
+- **Inconsistent quotes/semicolons**: Standardized by Prettier
+
+### Cross-Language Issues
+- **Git line endings**: Normalize across all files
+- **Trailing whitespace**: Removed by formatters
+- **File permissions**: Standardize executable bits
+- **Editor artifacts**: Remove temp files (`.swp`, `.DS_Store`)
+
+## Integration Examples
+
+### Rails API + React Frontend
+```bash
+/clean           # Cleans both Rails backend and React frontend
+/clean --safe    # Only formats, no fixes
+/clean --deep    # Comprehensive cleanup including TypeScript strict checks
+```
+
+### Rails Full-Stack with Stimulus
+```bash
+/clean           # RuboCop + ESLint for Stimulus controllers
+/clean --safe    # Format Ruby and JS without fixes
+```
+
+## Error Handling
+
+### Tool Availability
+- **Missing Tools**: Skip with warning, don't fail entire process
+- **Version Conflicts**: Report and suggest solutions
+- **Configuration Issues**: Provide helpful error messages
+
+### Failure Recovery
+- **Continue on Error**: Don't stop cleanup for single tool failures
+- **Partial Success**: Report what succeeded and what failed
+- **Manual Steps**: Provide instructions for issues requiring human intervention
+
+## Best Practices
+
+### When to Use
+- **Before Commits**: Ensure code quality before committing
+- **After Feature Work**: Clean up accumulated formatting debt
+- **Weekly Maintenance**: Regular codebase hygiene
+- **Pre-Deployment**: Final quality check
+
+### Team Workflow
+- **Consistent Standards**: All team members use same cleanup process
+- **CI Integration**: Include in automated workflows
+- **Pre-commit Hooks**: Run basic clean checks automatically
+
+## Implementation Notes
+
+The clean command should:
+1. **Be Fast**: Optimize for quick feedback in development
+2. **Be Safe**: Default to safe operations, require confirmation for destructive ones
+3. **Be Informative**: Show clear progress and results
+4. **Be Flexible**: Handle mixed projects gracefully
+5. **Be Consistent**: Produce same results regardless of environment

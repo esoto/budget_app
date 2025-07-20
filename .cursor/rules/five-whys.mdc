@@ -1,0 +1,216 @@
+---
+title: Five Whys Root Cause Analysis
+description: Guidelines for using the Five Whys technique to systematically identify root causes of problems, bugs, and issues in software development
+glob: "**/*"
+alwaysApply: true
+---
+
+# Five Whys Root Cause Analysis
+
+## Introduction
+
+Use the "Five Whys" root cause analysis technique to deeply understand problems and identify systemic issues rather than treating symptoms. This method helps move beyond surface-level fixes to address underlying causes that prevent problem recurrence.
+
+## The Five Whys Process
+
+### 1. Define the Problem
+**Purpose**: Establish a clear, specific problem statement
+
+#### Guidelines:
+- **Be Specific**: Use concrete, observable symptoms
+- **Avoid Assumptions**: State what actually happened, not why you think it happened  
+- **Include Context**: When, where, and under what conditions the problem occurred
+- **Quantify Impact**: Include metrics when possible (error rate, performance impact, user complaints)
+
+#### Examples:
+- ❌ "The app is slow" 
+- ✅ "Dashboard page load time increased from 2s to 8s for users with >100 projects"
+- ❌ "Users can't login"
+- ✅ "Authentication failure rate spiked to 15% between 2PM-4PM on production"
+
+### 2. Ask "Why?" Five Times
+**Purpose**: Systematically drill down to root cause through cause-effect relationships
+
+#### Process:
+1. **Why did this problem occur?** → Answer 1
+2. **Why did Answer 1 happen?** → Answer 2  
+3. **Why did Answer 2 happen?** → Answer 3
+4. **Why did Answer 3 happen?** → Answer 4
+5. **Why did Answer 4 happen?** → Answer 5 (Root Cause)
+
+#### Investigation Techniques:
+- **Code Analysis**: Review relevant code sections, git history, recent changes
+- **Log Analysis**: Examine error logs, performance metrics, system traces
+- **Environment Review**: Check infrastructure, dependencies, configurations
+- **Process Review**: Evaluate development, testing, and deployment processes
+- **Timeline Analysis**: Map when issues first appeared and what changed
+
+### 3. Validate Root Cause
+**Purpose**: Ensure the identified root cause is accurate and actionable
+
+#### Validation Criteria:
+- **Logical Chain**: Each "why" logically leads to the next
+- **Preventive Test**: Would fixing the root cause prevent this problem?
+- **Evidence-Based**: Can you prove each link in the chain?
+- **Actionable**: Can the root cause actually be addressed?
+
+#### Multiple Root Causes:
+- Consider if there are multiple contributing root causes
+- Use parallel Five Whys analysis for complex problems
+- Distinguish between primary and secondary root causes
+
+### 4. Develop Solutions
+**Purpose**: Create comprehensive solutions that address root causes and prevent recurrence
+
+#### Solution Categories:
+- **Immediate Fix**: Address the current problem
+- **Root Cause Fix**: Eliminate the underlying cause
+- **Preventive Measures**: Stop similar problems from occurring
+- **Systemic Improvements**: Strengthen overall processes and systems
+
+## Software Development Examples
+
+### Example 1: Performance Problem
+**Problem**: API response time increased from 100ms to 3000ms
+
+1. **Why?** → Database queries are taking longer
+2. **Why?** → Missing index on frequently queried column  
+3. **Why?** → Index was dropped during recent migration
+4. **Why?** → Migration didn't account for production query patterns
+5. **Why?** → No process for reviewing migrations against production usage
+
+**Root Cause**: Lack of migration review process
+**Solutions**: 
+- Add missing index (immediate)
+- Create migration review checklist (root cause)
+- Implement query performance monitoring (preventive)
+
+### Example 2: Bug in Production
+**Problem**: User data corruption affecting 5% of new registrations
+
+1. **Why?** → Race condition in user creation process
+2. **Why?** → Multiple concurrent requests modifying same user record
+3. **Why?** → No database-level uniqueness constraints
+4. **Why?** → Requirements didn't specify concurrent registration handling
+5. **Why?** → User story acceptance criteria lack edge case coverage
+
+**Root Cause**: Insufficient acceptance criteria for edge cases
+**Solutions**:
+- Add database constraints (immediate)
+- Fix race condition with proper locking (root cause) 
+- Enhance story template with edge case checklist (preventive)
+
+### Example 3: Security Incident
+**Problem**: Unauthorized access to user accounts
+
+1. **Why?** → Weak passwords allowed user account compromise
+2. **Why?** → No password complexity requirements enforced
+3. **Why?** → Authentication system uses default settings
+4. **Why?** → Security configuration wasn't reviewed during implementation
+5. **Why?** → No security review process in development workflow
+
+**Root Cause**: Missing security review process
+**Solutions**:
+- Force password reset with strong requirements (immediate)
+- Implement security configuration review (root cause)
+- Add security checkpoint to CI/CD pipeline (systemic)
+
+## Problem Category Guidelines
+
+### Code Issues
+- **Focus Areas**: Logic errors, performance, maintainability
+- **Investigation**: Code review, complexity analysis, dependency issues
+- **Common Root Causes**: Requirements gaps, insufficient testing, technical debt
+
+### Infrastructure Issues  
+- **Focus Areas**: Deployment failures, scaling problems, service outages
+- **Investigation**: Server logs, resource usage, configuration changes
+- **Common Root Causes**: Inadequate monitoring, manual processes, environment drift
+
+### Process Issues
+- **Focus Areas**: Communication gaps, quality problems, delivery delays
+- **Investigation**: Team workflows, tool usage, knowledge gaps  
+- **Common Root Causes**: Unclear processes, inadequate training, tooling limitations
+
+### User Experience Issues
+- **Focus Areas**: Usability problems, feature adoption, user complaints
+- **Investigation**: User behavior, UI/UX analysis, feedback patterns
+- **Common Root Causes**: User research gaps, design assumptions, inadequate testing
+
+## Best Practices
+
+### Conducting Analysis
+- **Stay Objective**: Focus on facts, not blame or assumptions
+- **Ask Follow-ups**: Use "How do you know?" and "What evidence supports this?"
+- **Think Systemically**: Look for process and system issues, not just individual mistakes
+- **Document Everything**: Record the entire analysis chain for future reference
+
+### Team Collaboration
+- **Include Stakeholders**: Involve people who understand different aspects of the problem
+- **Diverse Perspectives**: Get input from development, operations, QA, and users
+- **Blameless Culture**: Focus on improving systems, not finding fault with individuals
+- **Knowledge Sharing**: Use analysis results to improve team understanding
+
+### Implementation
+- **Prioritize Solutions**: Address immediate issues first, then root causes
+- **Monitor Results**: Track whether solutions actually prevent recurrence  
+- **Iterate Process**: Improve your Five Whys technique based on results
+- **Preventive Application**: Use for near-misses and minor issues before they become major
+
+## Common Pitfalls to Avoid
+
+### Analysis Mistakes
+- **Stopping Too Early**: Not drilling deep enough to find systemic causes
+- **Single Cause Bias**: Assuming there's only one root cause
+- **Blame Focus**: Looking for who rather than why
+- **Symptom Solutions**: Addressing effects rather than causes
+
+### Implementation Issues  
+- **Solution Overengineering**: Creating overly complex solutions
+- **Incomplete Follow-through**: Fixing immediate issues but ignoring root causes
+- **No Validation**: Not testing whether solutions actually work
+- **Documentation Gaps**: Failing to record lessons learned
+
+## Integration with Development Workflow
+
+### When to Use Five Whys
+- **Post-Incident Analysis**: After production issues or outages
+- **Bug Investigation**: For recurring or mysterious bugs
+- **Performance Problems**: When optimization attempts fail
+- **Process Failures**: When development workflows break down
+- **Quality Issues**: For patterns of defects or problems
+
+### Integration Points
+- **Incident Response**: Standard part of post-mortem process
+- **Bug Triaging**: For high-priority or recurring issues  
+- **Retrospectives**: Team reflection on process improvements
+- **Code Reviews**: When reviewing complex bug fixes
+- **Architecture Decisions**: Understanding why previous approaches failed
+
+## Output Format
+
+### Analysis Report
+```
+**Problem Statement**: [Clear, specific description]
+
+**Five Whys Analysis**:
+1. Why? → [Answer 1]
+2. Why? → [Answer 2] 
+3. Why? → [Answer 3]
+4. Why? → [Answer 4]
+5. Why? → [Answer 5 - Root Cause]
+
+**Root Cause Validation**:
+- Evidence supporting the chain
+- How fixing root cause prevents recurrence
+
+**Solution Plan**:
+- Immediate actions (timeline)
+- Root cause fixes (timeline) 
+- Preventive measures (timeline)
+- Success metrics
+
+**Follow-up**:
+- Review date for solution effectiveness
+- Process improvements identified
+```

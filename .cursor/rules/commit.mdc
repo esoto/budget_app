@@ -1,0 +1,117 @@
+---
+title: Commit Message Conventions
+description: Guidelines for creating well-formatted commits with conventional commit messages, emojis, and proper development workflow
+glob: "**/*"
+alwaysApply: true
+---
+
+# Commit Message Conventions
+
+## Introduction
+
+This rule defines the standard commit workflow and message format for this project. We use conventional commits with descriptive emojis to maintain a clean, readable git history that clearly communicates the purpose and scope of each change.
+
+## Commit Message Format
+
+All commit messages should follow the conventional commit format:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Commit Types with Emojis
+
+Use these standardized commit types with their corresponding emojis:
+
+- ✨ `feat`: New features or functionality
+- 🐛 `fix`: Bug fixes and error corrections
+- 📝 `docs`: Documentation changes only
+- ♻️ `refactor`: Code restructuring without changing functionality
+- 🎨 `style`: Code formatting, missing semicolons, whitespace changes
+- ⚡️ `perf`: Performance improvements
+- ✅ `test`: Adding, updating, or fixing tests
+- 🧑‍💻 `chore`: Tooling, configuration, maintenance tasks
+- 🚧 `wip`: Work in progress (use sparingly)
+- 🔥 `remove`: Removing code, files, or features
+- 🚑 `hotfix`: Critical fixes that need immediate attention
+- 🔒 `security`: Security-related improvements
+
+### Examples
+
+```bash
+✨ feat(auth): add OAuth2 Google authentication
+🐛 fix(api): resolve null pointer exception in user service
+📝 docs: update README with deployment instructions
+♻️ refactor(components): extract reusable Button component
+🎨 style: format code with prettier and fix eslint warnings
+```
+
+## Development Workflow
+
+### Standard Commit Process
+
+1. **Check Status**: Review current changes with `git status`
+2. **Stage Changes**: If no changes are staged, review and stage appropriate files
+3. **Pre-commit Checks**: Run automated checks (lint, build, generate docs)
+4. **Analyze Changes**: Determine appropriate commit type and scope
+5. **Write Message**: Create descriptive commit message following format
+6. **Execute Commit**: Complete the commit process
+
+### Usage Commands
+
+- `/commit` - Standard commit with pre-commit checks
+- `/commit --no-verify` - Skip pre-commit checks (use cautiously)
+
+### Automated Features
+
+- **Pre-commit Checks**: Automatically runs linting, builds, and doc generation
+- **Auto-staging**: Stages files if none are currently staged
+- **Type Detection**: Suggests appropriate commit type based on file changes
+- **Scope Suggestion**: Recommends scope based on modified directories/components
+
+## Best Practices
+
+### Writing Effective Messages
+
+- **Use Imperative Mood**: Write as commands ("Add feature" not "Added feature")
+- **Be Descriptive**: Explain what the commit does, not how
+- **Include Context**: Add scope when changes affect specific areas
+- **Explain Why**: Use the body to explain reasoning for complex changes
+- **Reference Issues**: Include issue/PR numbers when relevant
+
+### Commit Organization
+
+- **Keep Atomic**: Each commit should represent a single logical change
+- **Split Concerns**: Separate unrelated changes into different commits
+- **Avoid Mixed Types**: Don't combine features, fixes, and refactoring
+- **Test Changes**: Ensure each commit leaves the codebase in a working state
+
+### Scope Guidelines
+
+Use scopes to indicate the area of change:
+
+- `(auth)` - Authentication-related changes
+- `(api)` - API endpoints and server logic
+- `(ui)` - User interface components
+- `(db)` - Database schema or queries
+- `(config)` - Configuration files
+- `(deploy)` - Deployment and infrastructure
+
+## Common Pitfalls
+
+- **Vague Messages**: Avoid "fix stuff" or "update code"
+- **Too Broad**: Commits that touch too many unrelated areas
+- **Missing Context**: Not explaining why a change was made
+- **Inconsistent Format**: Not following the established convention
+- **Skipping Pre-commit**: Bypassing checks without good reason
+
+## Implementation Steps
+
+1. **Configure Git Hooks**: Set up pre-commit hooks for automated checks
+2. **Install Tools**: Ensure linting and formatting tools are available
+3. **Practice Format**: Use the conventional commit format consistently
+4. **Review History**: Regularly check that commit messages remain clear and helpful

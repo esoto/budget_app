@@ -1,0 +1,247 @@
+---
+title: Code Analysis Guidelines
+description: Comprehensive guidelines for performing advanced code analysis including quality evaluation, security review, architecture assessment, and performance analysis
+glob: "**/*"
+alwaysApply: true
+---
+
+# Code Analysis Guidelines
+
+## Introduction
+
+This rule defines structured approaches for performing comprehensive code analysis across multiple dimensions. Use these guidelines when conducting code reviews, architectural assessments, or technical evaluations to ensure thorough and consistent analysis.
+
+## Analysis Menu
+
+### 1. Knowledge Graph Generation
+**Purpose**: Map relationships between components and visualize system architecture
+
+#### Process:
+- **Component Mapping**: Identify all major components, classes, modules, and services
+- **Dependency Analysis**: Trace import/require statements and service dependencies  
+- **Data Flow**: Map how data flows through the system
+- **Integration Points**: Identify external APIs, databases, and third-party services
+- **Architectural Patterns**: Recognize MVC, microservices, layered architecture, etc.
+
+#### Tools & Techniques:
+- Static analysis of import/require statements
+- Database schema relationships
+- API endpoint mapping
+- Service interaction diagrams
+- Component dependency graphs
+
+#### Deliverables:
+- System architecture diagram
+- Component relationship matrix
+- Data flow diagrams
+- Dependency tree visualization
+
+### 2. Code Quality Evaluation
+**Purpose**: Assess maintainability, readability, and technical standards compliance
+
+#### Process:
+- **Complexity Metrics**: Calculate cyclomatic complexity, cognitive complexity
+- **Maintainability Index**: Assess ease of modification and extension
+- **Code Standards**: Check adherence to style guides and conventions
+- **Documentation Quality**: Evaluate comments, README, and inline docs
+- **Code Duplication**: Identify repeated code blocks and patterns
+
+#### Metrics to Analyze:
+- Lines of code per method/class
+- Nested conditional depth
+- Method parameter counts
+- Class inheritance depth
+- Code duplication percentage
+- Comment-to-code ratio
+
+#### Tools Integration:
+- RuboCop for Ruby code quality
+- ESLint for JavaScript quality
+- Complexity analyzers
+- Documentation coverage tools
+
+#### Deliverables:
+- Quality metrics dashboard
+- Code smell identification
+- Refactoring recommendations
+- Standards compliance report
+
+### 3. Performance Analysis
+**Purpose**: Identify bottlenecks and optimization opportunities
+
+#### Process:
+- **Profiling**: Analyze execution time and resource usage
+- **Algorithm Analysis**: Evaluate time/space complexity (Big O)
+- **Database Performance**: Review query efficiency and N+1 problems
+- **Memory Usage**: Identify memory leaks and excessive allocations
+- **Caching Strategies**: Assess current caching and optimization opportunities
+
+#### Analysis Areas:
+- **Ruby/Rails**: Database queries, view rendering, background jobs
+- **JavaScript**: DOM manipulation, API calls, bundle size
+- **Database**: Query performance, indexing strategies
+- **Network**: API response times, payload sizes
+- **Frontend**: Page load times, Core Web Vitals
+
+#### Deliverables:
+- Performance bottleneck report
+- Database query optimization plan
+- Caching strategy recommendations
+- Algorithm complexity analysis
+
+### 4. Security Review
+**Purpose**: Identify vulnerabilities and security best practice compliance
+
+#### Process:
+- **Vulnerability Scanning**: Use automated security tools
+- **Input Validation**: Review user input handling and sanitization
+- **Authentication/Authorization**: Assess access control mechanisms
+- **Data Protection**: Review sensitive data handling and storage
+- **Dependencies**: Check for vulnerable third-party packages
+
+#### Security Checklist:
+- **Rails Security**: Strong parameters, CSRF protection, SQL injection prevention
+- **JavaScript Security**: XSS prevention, secure API calls, content security policy
+- **Authentication**: Password policies, session management, OAuth implementation
+- **Authorization**: Role-based access, permission systems
+- **Data Protection**: Encryption at rest/transit, PII handling
+
+#### Tools Integration:
+- Brakeman for Rails security scanning
+- npm audit for JavaScript dependencies
+- OWASP security guidelines
+- Security header analysis
+
+#### Deliverables:
+- Security vulnerability report
+- Risk assessment matrix
+- Security improvement roadmap
+- Compliance checklist
+
+### 5. Architecture Review
+**Purpose**: Evaluate system design patterns and architectural principles
+
+#### Process:
+- **Design Patterns**: Identify and evaluate pattern usage (MVC, Observer, Factory, etc.)
+- **SOLID Principles**: Assess adherence to Single Responsibility, Open/Closed, etc.
+- **Coupling Analysis**: Evaluate component interdependencies
+- **Cohesion Assessment**: Review how well components work together
+- **Modularity**: Assess separation of concerns and module boundaries
+
+#### Architecture Evaluation:
+- **Rails Architecture**: Controller/Model/View separation, service objects, concerns
+- **JavaScript Architecture**: Module systems, component patterns, state management
+- **Database Design**: Normalization, relationships, schema organization
+- **API Design**: RESTful principles, versioning, documentation
+
+#### Deliverables:
+- Architecture assessment report
+- Design pattern usage analysis
+- Refactoring recommendations
+- Modularization strategy
+
+### 6. Test Coverage Analysis
+**Purpose**: Evaluate testing completeness and quality
+
+#### Process:
+- **Coverage Metrics**: Measure line, branch, and path coverage
+- **Test Quality**: Assess test maintainability and effectiveness
+- **Edge Cases**: Identify missing test scenarios
+- **Test Patterns**: Evaluate test organization and patterns
+- **Performance Tests**: Review load and integration testing
+
+#### Testing Areas:
+- **Unit Tests**: Method-level testing coverage
+- **Integration Tests**: Component interaction testing
+- **System Tests**: End-to-end user workflow testing
+- **Performance Tests**: Load, stress, and scalability testing
+- **Security Tests**: Authentication, authorization, input validation testing
+
+#### Deliverables:
+- Test coverage report
+- Missing test case identification
+- Test quality assessment
+- Testing strategy recommendations
+
+## Analysis Process Framework
+
+### 1. Analysis Selection
+**Determine Focus**: Based on project needs, select one or more analysis types:
+- New projects → Architecture Review + Code Quality
+- Performance issues → Performance Analysis + Code Quality
+- Security concerns → Security Review + Dependencies
+- Maintenance projects → Technical Debt + Test Coverage
+- Pre-deployment → Comprehensive multi-dimensional analysis
+
+### 2. Data Collection
+**Gather Information**:
+- Run automated tools (RuboCop, Brakeman, ESLint, etc.)
+- Examine codebase structure and patterns
+- Review documentation and comments
+- Analyze test suites and coverage
+- Check dependencies and external integrations
+
+### 3. Analysis Execution
+**Systematic Review**:
+- Apply structured analysis methods from selected categories
+- Use both automated tools and manual inspection
+- Document findings with specific examples
+- Cross-reference issues across analysis dimensions
+
+### 4. Report Generation
+**Comprehensive Documentation**:
+- Executive summary with key findings
+- Detailed analysis results by category  
+- Risk assessment and priority matrix
+- Actionable recommendations with examples
+- Implementation roadmap with timelines
+
+### 5. Recommendations Prioritization
+**Impact-Based Ordering**:
+- **Critical**: Security vulnerabilities, major performance issues
+- **High**: Architecture violations, maintainability problems
+- **Medium**: Code quality improvements, test coverage gaps
+- **Low**: Style inconsistencies, documentation enhancements
+
+## Output Format Standards
+
+### Executive Summary
+- **Project Overview**: Brief description and scope
+- **Analysis Scope**: What was analyzed and methodology used
+- **Key Findings**: Top 3-5 most important discoveries
+- **Risk Assessment**: Overall risk level and critical items
+- **Recommendations**: Priority actions with expected impact
+
+### Detailed Findings
+- **Category**: Architecture, Performance, Security, etc.
+- **Issue Description**: Clear explanation of the problem
+- **Code Examples**: Specific instances with file/line references
+- **Impact Assessment**: Severity and business impact
+- **Recommendation**: Specific steps to address the issue
+- **Effort Estimate**: Time/complexity to implement fix
+
+### Improvement Roadmap
+- **Phase 1 (Critical)**: Immediate actions required
+- **Phase 2 (High)**: Important improvements for next sprint
+- **Phase 3 (Medium)**: Quality improvements for future iterations
+- **Phase 4 (Low)**: Nice-to-have enhancements
+
+## Best Practices
+
+### Analysis Approach
+- **Holistic View**: Consider system interactions, not just individual components
+- **Context Awareness**: Understand business requirements and constraints
+- **Tool Integration**: Combine automated analysis with manual expertise
+- **Continuous Improvement**: Regular analysis as part of development cycle
+
+### Documentation Standards
+- **Clarity**: Use clear, non-technical language for business impact
+- **Specificity**: Provide concrete examples and actionable steps
+- **Prioritization**: Focus on high-impact, achievable improvements
+- **Follow-up**: Include monitoring and validation approaches
+
+### Team Collaboration
+- **Stakeholder Involvement**: Include relevant team members in analysis
+- **Knowledge Sharing**: Document findings for team learning
+- **Implementation Support**: Provide guidance during improvement implementation
+- **Feedback Loop**: Collect feedback to improve future analysis quality
