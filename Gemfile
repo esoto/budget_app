@@ -4,8 +4,8 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+# Use sqlite3 as the database for Active Record
+gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -61,7 +61,7 @@ gem "rspec-rails", "~> 8.0"
 gem "hotwire-rails", "~> 0.1.3"
 
 # Tailwind CSS
-gem "tailwindcss-rails", "~> 2.4"
+gem "tailwindcss-rails", "~> 4.2"
 
 # For better form handling
 gem "simple_form", "~> 5.2"

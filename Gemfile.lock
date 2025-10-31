@@ -185,7 +185,6 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -313,6 +312,13 @@ GEM
       fugit (~> 1.11.0)
       railties (>= 7.1)
       thor (~> 1.3.1)
+    sqlite3 (2.7.2-aarch64-linux-gnu)
+    sqlite3 (2.7.2-aarch64-linux-musl)
+    sqlite3 (2.7.2-arm-linux-gnu)
+    sqlite3 (2.7.2-arm-linux-musl)
+    sqlite3 (2.7.2-arm64-darwin)
+    sqlite3 (2.7.2-x86_64-linux-gnu)
+    sqlite3 (2.7.2-x86_64-linux-musl)
     sshkit (1.24.0)
       base64
       logger
@@ -323,14 +329,15 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
-    tailwindcss-rails (2.7.9-aarch64-linux)
+    tailwindcss-rails (4.2.3)
       railties (>= 7.0.0)
-    tailwindcss-rails (2.7.9-arm-linux)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.7.9-arm64-darwin)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.7.9-x86_64-linux)
-      railties (>= 7.0.0)
+      tailwindcss-ruby (~> 4.0)
+    tailwindcss-ruby (4.1.11)
+    tailwindcss-ruby (4.1.11-aarch64-linux-gnu)
+    tailwindcss-ruby (4.1.11-aarch64-linux-musl)
+    tailwindcss-ruby (4.1.11-arm64-darwin)
+    tailwindcss-ruby (4.1.11-x86_64-linux-gnu)
+    tailwindcss-ruby (4.1.11-x86_64-linux-musl)
     thor (1.3.2)
     thruster (0.1.14)
     thruster (0.1.14-aarch64-linux)
@@ -378,7 +385,6 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
-  pg (~> 1.1)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
@@ -388,8 +394,9 @@ DEPENDENCIES
   solid_cable
   solid_cache
   solid_queue
+  sqlite3 (>= 1.4)
   stimulus-rails
-  tailwindcss-rails (~> 2.4)
+  tailwindcss-rails (~> 4.2)
   thruster
   turbo-rails
   tzinfo-data
